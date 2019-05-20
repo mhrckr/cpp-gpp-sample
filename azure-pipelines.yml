@@ -20,8 +20,9 @@ steps:
 - script: 
     gcc -v
 - script: 
-    touch readme.txt
+    touch abc.txt
 - bash: ls
-- bash: echo $name >> readme.txt
+- bash: echo $name
+- bash: echo $name >> abc.txt
 - bash: cat readme.txt
 
