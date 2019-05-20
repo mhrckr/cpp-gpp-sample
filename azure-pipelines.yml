@@ -19,5 +19,9 @@ steps:
     make
 - script: 
     gcc -v
+- script: 
+    touch readme.txt
+    echo $name >> readme.txt
+    cat readme.txt
     
   displayName: 'make'
