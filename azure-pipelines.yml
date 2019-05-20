@@ -38,18 +38,18 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
-     '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)'
-     'abc.txt'
+     '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
+     abc.txt'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutput
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    itemPattern: 'MyBuildOutput'
-    downloadPath: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
-- bash: ls
+# - task: DownloadBuildArtifacts@0
+#   inputs:
+#     buildType: 'current'
+#     downloadType: 'single'
+#     itemPattern: 'MyBuildOutput'
+#     downloadPath: '$(BUILD_ARTIFACTSTAGINGDIRECTORY)'
+# - bash: ls
