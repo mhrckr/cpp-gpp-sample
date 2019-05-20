@@ -6,8 +6,10 @@
 # Set variables once
 variables:
   a: mh
+  b: $(Rev:.r)
+  c: $(Build.SourceVersion)
 
-name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
+name: $(a)_$(b)_$(c)
 trigger:
 - master
 
@@ -23,6 +25,6 @@ steps:
     touch abc.txt
 - bash: ls
 - bash: echo $name
-- bash: echo $(a)_$(Rev:.r)_$(Build.SourceVersion) >> abc.txt
+- bash: echo $(a)_$(b)_$(c) >> abc.txt
 - bash: cat abc.txt
 
