@@ -23,6 +23,6 @@ steps:
     touch abc.txt
 - bash: ls
 - bash: echo $name
-- bash: echo $name >> abc.txt
-- bash: cat readme.txt
+- bash: echo $(a)_$(Rev:.r)_$(Build.SourceVersion) >> abc.txt
+- bash: cat abc.txt
 
