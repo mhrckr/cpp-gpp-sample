@@ -17,5 +17,7 @@ pool:
 steps:
 - script: |
     make
+- script: 
+    gcc -v
     
   displayName: 'make'
