@@ -9,7 +9,7 @@ variables:
   b: $(Rev:.r)
   c: $(Build.SourceVersion)
 
-name: $(a)_$(b)_$(c)
+name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
 trigger:
 - master
 
@@ -28,3 +28,17 @@ steps:
 - bash: echo $(a)_$(b)_$(c) >> abc.txt
 - bash: cat abc.txt
 
+
+- powershell: .\build.ps1
+- task: CopyFiles@2
+  inputs:
+    Contents: |
+     \**\*.bin
+     \**\abc.txt
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutput
+- bash: ls
