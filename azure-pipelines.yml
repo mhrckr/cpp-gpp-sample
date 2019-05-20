@@ -38,8 +38,8 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
-     '**/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
-     abc.txt'
+     **/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
+     abc.txt
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
