@@ -1,11 +1,5 @@
 # C/C++ with GCC
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    itemPattern: '\*.exe 
-      \abc.txt'
-    downloadPath: '$(System.ArtifactsDirectory)'
+
 # Build your C/C++ project with GCC using make.
 # Add steps that publish test results, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/c-cpp/gcc
@@ -37,18 +31,25 @@ steps:
 - bash: cat abc.txt
 
 
-#- powershell: .\build.ps1
-- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+# #- powershell: .\build.ps1
+# - powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
-- task: CopyFiles@2
-  inputs:
-    Contents: |
-     \**\*.bin
-     \**\abc.txt
-    targetFolder: $(Build.ArtifactStagingDirectory)
+# - task: CopyFiles@2
+#   inputs:
+#     Contents: |
+#      \**\*.bin
+#      \**\abc.txt
+#     targetFolder: $(Build.ArtifactStagingDirectory)
 
-- task: PublishBuildArtifacts@1
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathtoPublish: $(Build.ArtifactStagingDirectory)
+#     artifactName: MyBuildOutput
+- task: DownloadBuildArtifacts@0
   inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: MyBuildOutput
+    buildType: 'current'
+    downloadType: 'single'
+    itemPattern: '*.exe 
+      abc.txt'
+    downloadPath: '$(System.ArtifactsDirectory)'
 - bash: ls
