@@ -8,6 +8,7 @@ variables:
   a: mh
   b: $(Rev:.r)
   c: $(Build.SourceVersion)
+  BuildConfiguration : release
 
 name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
 trigger:
@@ -29,7 +30,9 @@ steps:
 - bash: cat abc.txt
 
 
-- powershell: .\build.ps1
+#- powershell: .\build.ps1
+- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+
 - task: CopyFiles@2
   inputs:
     Contents: |
